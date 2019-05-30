@@ -22,15 +22,58 @@ let nfcteams = [
 let nflteams = [afcteams, nfcteams]
 
 module.exports = {
-    // read: (req, res) => { 
-    //     res.send(nflteams)
-    // },
+    read: (req, res) => { 
+        res.send(nflteams)
+    },
+
     create: (req, res) => {
-        let newTeam = req.body
-        newTeam.id = id++
-       {newTeam.conference === 'AFC' ?
+        let {team, location, conference, imageUrl} = req.body
+        let newTeam = {
+            id: id++,
+            team,
+            location,
+            conference,
+            imageUrl
+        }
+        console.log(newTeam)
+       {conference === 'AFC' ?
         afcteams.push(newTeam)
         : nfcteams.push(newTeam)}
+        res.send(nflteams)
+    },
+
+    update: (req, res) => {
+         let {id} = req.params
+         let {team, location, imageUrl, conference} = req.body
+
+        let index = nflteams.findIndex(team => +team.id === +id)
+        let foundTeam = nflteams.find(team => +team.id === +id)
+        
+
+        nflteams[index] = {
+            id: foundTeam.id,
+            team: team || foundTeam.team,
+            location: location || foundTeam.location,
+            imageUrl: imageUrl || foundTeam.imageUrl,
+            conference: conference || foundTeam.conference
+        }
+        res.send(nflteams)
+    },
+
+    delete: (req, res) => {
+        let {id} = req.params
+        console.log(id)
+        let afcindex = afcteams.findIndex(team => +team.id === +id)
+        let nfcindex = nfcteams.findIndex(team => +team.id === +id)
+        console.log(afcindex, nfcindex)
+        if(afcindex >= 0){
+            afcteams.splice(afcindex, 1)
+        } else  {
+            nfcteams.splice(nfcindex, 1)
+
+        } 
+
+        
         res.send(nflteams)
     }
     
