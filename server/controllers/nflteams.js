@@ -70,10 +70,7 @@ module.exports = {
             afcteams.splice(afcindex, 1)
         } else  {
             nfcteams.splice(nfcindex, 1)
-
         } 
-
-        
         res.send(nflteams)
     }
     
