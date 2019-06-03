@@ -5,9 +5,10 @@ class EditTeam extends Component {
         super(props) 
 
         this.state = {
-            team: '',
-            location: '',
-            imageUrl: '',
+            team: props.Team.team,
+            conference: props.Team.conference,
+            location: props.Team.location,
+            imageUrl: props.Team.imageUrl,
             edit: false
         }
     }
@@ -19,22 +20,24 @@ class EditTeam extends Component {
         })
     }
 
-    editSameTeam = (e) => {
-        e.preventDefault();
+    editSameTeam = (id) => {
+        
 
-        let { team, location, imageUrl } = this.state
+        let { team, location, imageUrl, conference } = this.state
         let editTeam = {
             team,
+            conference,
             location,
             imageUrl
         }
-        this.props.updateTeam(editTeam)
+        this.props.updateTeam(id, editTeam)
 
-        // this.setState({
-        //     team: '',
-        //     location: '',
-        //     imageUrl: ''
-        // })
+        this.setState({
+            team: '',
+            location: '',
+            imageUrl: '',
+            edit: false
+        })
     }
 
     toggleEdit = () => {
@@ -54,24 +57,27 @@ class EditTeam extends Component {
                      placeholder="Location"
                      name='location'
                      onChange={this.handleChange}
+                     value={this.state.location}
                      /> <br/>
                     <input style={{margin: 5, border: '3px solid #999', borderRadius: 8}}
                      type="text"
                      placeholder="Team"
-                     name='Team'
+                     name='team'
                      onChange={this.handleChange}
+                     value={this.state.team}
                      /> <br/>
-                    <input style={{margin: 5, border: '3px solid #999', borderRadius: 8}}
+                    {/* <input style={{margin: 5, border: '3px solid #999', borderRadius: 8}}
                      type="text"
                      placeholder="Conference"
                      name='conference'
                      onChange={this.handleChange}
-                     /> <br/>
+                     /> <br/> */}
                     <input style={{margin: 5, border: '3px solid #999', borderRadius: 8}}
                      type="text"
                      placeholder="Logo"
                      name='imageUrl'
                      onChange={this.handleChange}
+                     value={this.state.imageUrl}
                      /> <br/>
                      </>
                      : <>
@@ -84,13 +90,13 @@ class EditTeam extends Component {
                     <section>
                         {this.state.edit ?
                         <>
-                        <button onClick={this.toggleEdit}>Cancel</button>
-                        <button onChange={this.handleChange} onClick={this.editSameTeam} >Update</button>
+                        <button style={{borderRadius: 8, margin: 5, backgroundColor: 'solid #999', cursor: 'pointer'}} onClick={this.toggleEdit}>Cancel</button>
+                        <button style={{borderRadius: 8, margin: 5, backgroundColor: '#DDDDDD', cursor: 'pointer'}} onChange={this.handleChange} onClick={() => this.editSameTeam(Team.id)} >Update</button>
                         </>
                         :
                         <>
-                        <button  onClick={this.toggleEdit}>Edit</button>
-                        <button onClick={() => deleteTeam(Team.id)}>Delete</button>
+                        <button style={{borderRadius: 8, margin: 5, backgroundColor: 'solid #999', cursor: 'pointer'}} onClick={this.toggleEdit}>Edit</button>
+                        <button style={{borderRadius: 8, margin: 5, border: 'none', backgroundColor: '#CE1126', color: 'white', cursor: 'pointer'}} onClick={() => deleteTeam(Team.id)}>Delete</button>
                         </>
                         }
                     </section> 

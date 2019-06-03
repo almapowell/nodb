@@ -36,7 +36,7 @@ module.exports = {
             imageUrl
         }
         console.log(newTeam)
-       {conference === 'AFC' ?
+       {conference.toUpperCase() === 'AFC' ?
         afcteams.push(newTeam)
         : nfcteams.push(newTeam)}
         res.send(nflteams)
@@ -45,18 +45,34 @@ module.exports = {
     update: (req, res) => {
          let {id} = req.params
          let {team, location, imageUrl, conference} = req.body
+         console.log(req.body, id)
 
-        let index = nflteams.findIndex(team => +team.id === +id)
-        let foundTeam = nflteams.find(team => +team.id === +id)
-        
-
-        nflteams[index] = {
-            id: foundTeam.id,
-            team: team || foundTeam.team,
-            location: location || foundTeam.location,
-            imageUrl: imageUrl || foundTeam.imageUrl,
-            conference: conference || foundTeam.conference
+        let index 
+        let foundTeam
+        if(conference.toUpperCase() === "AFC"){
+            index = afcteams.findIndex(team => +team.id === +id)
+            foundTeam = afcteams.find(team => +team.id === +id)
+            console.log(11111111111111, index, foundTeam, afcteams)
+            afcteams[index] = {
+                id: foundTeam.id,
+                team: team ? team : foundTeam.team,
+                location: location ? location : foundTeam.location,
+                imageUrl: imageUrl ? imageUrl : foundTeam.imageUrl,
+                conference: conference ? conference : foundTeam.conference
+            }
+        } else {
+            index = nfcteams.findIndex(team => +team.id === +id)
+            foundTeam = nfcteams.find(team => +team.id === +id)
+            nfcteams[index] = {
+                id: foundTeam.id,
+                team: team || foundTeam.team,
+                location: location || foundTeam.location,
+                imageUrl: imageUrl || foundTeam.imageUrl,
+                conference: conference || foundTeam.conference
+            }
         }
+        let nflteams = [afcteams, nfcteams]
+            
         res.send(nflteams)
     },
 

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import CreateNewTeam from './CreateNewTeam';
-import { relative } from 'path';
 import EditTeam from './EditTeam'
 
 class DisplayTeams extends Component {
@@ -29,12 +28,14 @@ class DisplayTeams extends Component {
     }
 
     updateTeam = (id, team) => {
+        console.log(id, team)
         axios.put(`/api/nflteams/${id}`, team)
-        .then(res => this.setState({
+        .then(res => {
+            console.log(res.data)
+            this.setState({
                 nflteams: res.data
-        })).catch(err => console.log('Why cant I see?', err))
+        })}).catch(err => console.log('Why cant I see?', err))
     }
-        // NEED TO CONTINUE ON UPDATEtEAM
 
     deleteTeam = (id) => {
         axios.delete(`/api/nflteams/${id}`)
@@ -61,6 +62,8 @@ class DisplayTeams extends Component {
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                 {AFCTeams}
                </div>
+
+                <div style={{border: '2px solid black'}} ></div>
 
                <div style={{display: 'flex', flexDirection: 'column'}}>
                 {NFCTeams}
