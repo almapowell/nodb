@@ -1,0 +1,38 @@
+.delete {
+    border-radius: 8px;
+    height: 25px;
+    width: 60px;
+    margin: 5px;
+    border: none;
+    background-color: #CE1126; 
+    color: white; 
+    cursor: pointer
+}
+
+.delete:hover {
+    background-color: rgb(246, 29, 29);
+    box-shadow: 0px 15px 20px rgba(214, 19, 19, 0.4);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+
+
+
+  .Button{
+    border-radius: 8px;
+    height: 25px;
+    width: 60px;
+    margin: 5px;
+    background-color: #003B66;
+    border: none;
+    color: white;
+    cursor: pointer
+  }
+
+  .Button:hover {
+    background-color: rgb(29, 105, 246);
+    box-shadow: 0px 15px 20px rgba(11, 51, 138, 0.4);
+    color: rgb(255, 255, 255);
+    transform: translateY(-1px);
+  }

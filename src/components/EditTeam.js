@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import './EditTeam.css'
 
 class EditTeam extends Component {
     constructor(props) {
@@ -90,13 +91,13 @@ class EditTeam extends Component {
                     <section>
                         {this.state.edit ?
                         <>
-                        <button style={{borderRadius: 8, margin: 5, backgroundColor: 'solid #999', cursor: 'pointer'}} onClick={this.toggleEdit}>Cancel</button>
-                        <button style={{borderRadius: 8, margin: 5, backgroundColor: '#DDDDDD', cursor: 'pointer'}} onChange={this.handleChange} onClick={() => this.editSameTeam(Team.id)} >Update</button>
+                        <button className='delete' onClick={this.toggleEdit}>Cancel</button>
+                        <button className='Button' onChange={this.handleChange} onClick={() => this.editSameTeam(Team.id)} >Update</button>
                         </>
                         :
                         <>
-                        <button style={{borderRadius: 8, margin: 5, backgroundColor: 'solid #999', cursor: 'pointer'}} onClick={this.toggleEdit}>Edit</button>
-                        <button style={{borderRadius: 8, margin: 5, border: 'none', backgroundColor: '#CE1126', color: 'white', cursor: 'pointer'}} onClick={() => deleteTeam(Team.id)}>Delete</button>
+                        <button className='Button' onClick={this.toggleEdit}>Edit</button>
+                        <button className='delete' onClick={() => deleteTeam(Team.id)}>Delete</button>
                         </>
                         }
                     </section> 
@@ -112,4 +113,4 @@ class EditTeam extends Component {
 export default EditTeam
 
 
-// onClick={() => updateTeam(Team.id, this.state)}
+// style={{borderRadius: 8, margin: 5, border: 'none', backgroundColor: '#CE1126', color: 'white', cursor: 'pointer'}}
